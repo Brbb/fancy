@@ -5,20 +5,36 @@ const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
 const fs = require("fs");
-const security = require('./handlers/security')
+const security = require("./handlers/security");
+const morgan = require("morgan");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.all("*", security.handle);
+app.use(security.jwt());
+app.use(morgan("dev"));
 
+app.use(function(err, req, res, next) {
+	if (!err) return next();
+
+	if (err === "UnauthorizedError" || err.name === "UnauthorizedError") {
+		res.status(401).send("Unauthorized");
+	} else if (err) res.status(500).send("Oooops, some error occurred");
+	else return next();
+});
+ 
 app.use("/api", router);
 
+// Load routes dynamically
 let routeFiles = fs.readdirSync("./routes");
 routeFiles.forEach(rf => {
-  app.use(`/api/${rf.replace(".js", "")}`, require(`./routes/${rf}`));
+	app.use(`/api/${rf.replace(".js", "")}`, require(`./routes/${rf}`));
+});
+
+app.use(function(req, res) {
+	res.status(404).send("Sorry can't find that!");
 });
 
 app.listen(process.env.API_PORT, () =>
-  console.log(`LISTENING ON PORT ${process.env.API_PORT}`)
+	console.log(`LISTENING ON PORT ${process.env.API_PORT}`)
 );

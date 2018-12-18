@@ -1,28 +1,27 @@
-const jwt = require("jsonwebtoken");
+// This solution is not ideal because at each restart the cache is flushed, but it gives a glance of possible mechanisms to create a global
+// list of tokens we don't want to use/allow anymore and solves the JWT revoke problem. Redis or a persistent memcache might be a better solution.
+// Another solution for the login is the session.
+
+var memcache = require("../util/memcache");
+const expressJwt = require("express-jwt");
+
+function isRevoked(req, token, done) {
+	var blackslistedToken = memcache.get(token.jti);
+	if (blackslistedToken) return done("UnauthorizedError");
+
+	return done(null);
+}
 
 module.exports = {
-  handle: (req, res, next) => {
-    if (req.url == "/api/auth") return next();
-
-    var token = req.headers["authorization"];
-    if (!token) {
-      return res.status(403).send({
-        success: false,
-        message: "No token provided."
-      });
-    }
-    // verifies secret and checks exp
-    jwt.verify(token, process.env.TOKEN_SECRET, function(err, decoded) {
-      if (err) {
-        return res.json({
-          success: false,
-          message: "Failed to authenticate token."
-        });
-      } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
-      }
-    });
-  }
+	revokeToken: token => {
+		memcache.set(token.jti, token);
+	},
+	jwt: () => {
+		return expressJwt({
+			secret: process.env.TOKEN_SECRET,
+			isRevoked: isRevoked
+		}).unless({
+			path: ["/api/auth"]
+		});
+	}
 };
