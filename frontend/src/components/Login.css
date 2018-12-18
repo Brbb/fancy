@@ -1,0 +1,18 @@
+.Login {
+  color: cornflowerblue;
+  vertical-align: middle;
+  text-align: center;
+  height: 350px;
+  width: 350px;
+  background: white;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+}
