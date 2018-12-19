@@ -1,0 +1,27 @@
+.langDropdown {
+  font-size: 12px;
+  height: 35px;
+  min-width: 250px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  background: white;
+  border: cornflowerblue solid 1px;
+  color: cornflowerblue;
+  cursor: pointer;
+}
+
+.generalSubmitBtn{
+    margin-bottom: 20px
+}
+
+.radioGroup {
+  width: 250px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.radioButton{
+    font-size: 12px;
+    margin-right: 10px
+}

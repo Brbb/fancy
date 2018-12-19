@@ -5,3 +5,92 @@
 .App-link {
   color: #61dafb;
 }
+
+.formContainer {
+  color: cornflowerblue;
+  vertical-align: middle;
+  text-align: center;
+  height: 300px;
+  width: 300px;
+  background: white;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  padding: 20px
+}
+
+.formTitle {
+  margin: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.submitBtn {
+  font-size: 12px;
+  height: 35px;
+  min-width: 250px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  background: cornflowerblue;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 80px;
+}
+
+.genericBtn {
+  margin-bottom: 30px;
+  font-size: 12px;
+  height: 35px;
+  min-width: 250px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  background: white;
+  border: cornflowerblue solid 1px;
+  color: cornflowerblue;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+input[type="button"]:disabled {
+  background: gray;
+  opacity: 0.6;
+}
+
+.textField {
+  width: 250px;
+  height: 25px;
+  border: 1px solid cornflowerblue;
+  margin: 5px;
+}
+
+.textFieldLabel {
+  display: flex;
+  text-align: left;
+  font-size: 13px;
+  min-width: 250px;
+}
+
+.loginError {
+  font-size: 10px;
+  color: red;
+}

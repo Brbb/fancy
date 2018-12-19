@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./Login.css";
+import "./CreateAccount.css";
 import auth from "../services/auth/api";
 
-class Login extends Component {
+class CreateAccount extends Component {
   constructor() {
     super();
     this.state = {
       username: "",
       password: "",
+      repeatPassword: "",
       error: ""
     };
   }
@@ -23,23 +23,30 @@ class Login extends Component {
   handlePassChange = event => {
     this.setState({ password: event.target.value });
   };
+  handleRepeatPassChange = event => {
+    if (this.state.password !== event.target.value) {
+      this.setState({ error: "Passwords must match" });
+    } else this.dismissError();
+    this.setState({ repeatPassword: event.target.value });
+  };
 
-  login = async () => {
-    var loginResult = await auth.login(
+  signup = async () => {
+    var signupResult = await auth.signup(
       this.state.username,
-      this.state.password
-    ); // SSL
-    if (loginResult.success) {
-      this.props.history.push("/settings");
-    } else this.setState({ error: loginResult.reason });
+      this.state.password,
+      this.state.repeatPassword
+    );
+    if (signupResult.success) {
+      this.props.history.push("/");
+    } else this.setState({ error: signupResult.reason });
   };
 
   render() {
     return (
-      <div className="Login formContainer">
+      <div className="CreateAccount formContainer">
         <form className="form" onSubmit={this.handleSubmit}>
           <label className="formTitle">Fancy App</label>
-          <label className="textFieldLabel">Email</label>
+          <label>Email</label>
           <input
             type="text"
             className="textField"
@@ -49,7 +56,7 @@ class Login extends Component {
             onChange={this.handleUserChange}
           />
 
-          <label className="textFieldLabel">Password</label>
+          <label>Password</label>
           <input
             type="password"
             placeholder="super secret"
@@ -57,6 +64,14 @@ class Login extends Component {
             className="textField"
             value={this.state.password}
             onChange={this.handlePassChange}
+          />
+          <input
+            type="password"
+            placeholder="repeat super secret"
+            data-test="password"
+            className="textField"
+            value={this.state.repeatPassword}
+            onChange={this.handleRepeatPassChange}
           />
           {this.state.error && (
             <label
@@ -70,17 +85,19 @@ class Login extends Component {
           <input
             className="submitBtn"
             type="button"
-            value="Log In"
-            onClick={this.login}
-            disabled={this.state.username === "" || this.state.password === ""}
+            value="Create New Account"
+            onClick={this.signup}
+            disabled={
+              this.state.username === "" ||
+              this.state.password === "" ||
+              this.state.repeatPassword === "" ||
+              this.state.error !== ""
+            }
           />
-          <button className="genericBtn">
-            <Link to="/new">Create New Account</Link>
-          </button>
         </form>
       </div>
     );
   }
 }
 
-export default Login;
+export default CreateAccount;
