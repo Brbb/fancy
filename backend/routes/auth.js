@@ -9,8 +9,11 @@ async function logout(req, res) {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  let result = await ctrl.login(email, password);
-  return res.status(result.statusCode).send(result.message);
+  let result = await ctrl.login(email, password).catch(err => {
+    console.error(err);
+    return res.status(500);
+  });
+  return res.status(200).send(result);
 });
 
 // This is called on user deletion to invalidate the Token

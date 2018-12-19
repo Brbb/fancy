@@ -27,12 +27,12 @@ module.exports = {
 
   retrieve: id =>
     UserModel.findOne({ _id: id }).then(user => {
-      if (!user) {
-        return { statusCode: 404, message: "User not found" };
-      }
+      if (!user) return { err: "User not found" };
+
       return {
-        statusCode: 200,
-        message: { id: user._id, email: user.email, settings: user.settings }
+        id: user._id,
+        email: user.email,
+        settings: user.settings
       };
     }),
 
@@ -98,17 +98,8 @@ module.exports = {
       );
     }
     return validUserPasswordCombination
-      ? {
-          statusCode: 200,
-          message: { success: true, token: token, userid: user._id }
-        }
-      : {
-          statusCode: 200,
-          message: {
-            success: false,
-            reason: "Wrong username/password combination"
-          }
-        };
+      ? { token: token, userid: user._id }
+      : { err: "Wrong username/password combination" };
   },
 
   logout: userToken => {

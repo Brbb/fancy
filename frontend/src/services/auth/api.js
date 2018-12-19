@@ -9,9 +9,12 @@ var auth = {
     return axios
       .post("/api/auth/login", { email: user, password: password })
       .then(response => {
-        localStorage.setItem("jwt", response.data.token);
-        localStorage.setItem("me", response.data.userid);
-        return { success: true, payload: response.data };
+        console.log(response)
+        if (!response.data.err) {
+          localStorage.setItem("jwt", response.data.token);
+          localStorage.setItem("me", response.data.userid);
+        }
+        return response.data;
       })
       .catch(err => {
         console.log(err);

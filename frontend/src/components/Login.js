@@ -29,9 +29,11 @@ class Login extends Component {
       this.state.username,
       this.state.password
     ); // SSL
-    if (loginResult.success) {
+    if (!loginResult.err) {
       this.props.history.push("/settings");
-    } else this.setState({ error: loginResult.reason });
+    } else {
+      this.setState({ error: loginResult.err });
+    }
   };
 
   render() {
