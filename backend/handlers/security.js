@@ -20,8 +20,6 @@ module.exports = {
 		return expressJwt({
 			secret: process.env.TOKEN_SECRET,
 			isRevoked: isRevoked
-		}).unless({
-			path: ["/api/auth"]
-		});
+		}).unless({path: [/^\/api\/auth\/.*/]});
 	}
 };
