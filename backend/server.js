@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
 const fs = require("fs");
-const security = require("./handlers/security");
+const security = require("./helpers/securityHelper");
 const morgan = require("morgan");
 
 app.use(bodyParser.json());
@@ -18,11 +18,11 @@ app.use(function(err, req, res, next) {
 	if (!err) return next();
 
 	if (err === "UnauthorizedError" || err.name === "UnauthorizedError") {
-		res.status(401).send("Unauthorized");
-	} else if (err) res.status(500).send("Oooops, some error occurred");
-	else return next();
+		return res.status(401).send("Unauthorized");
+	}
+	return res.status(500).send("Oooops, some error occurred");
 });
- 
+
 app.use("/api", router);
 
 // Load routes dynamically

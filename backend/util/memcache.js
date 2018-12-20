@@ -1,3 +1,5 @@
+//This will not scale horizontally, we clearly need a shared cache or storage of any type.
+
 module.exports = (function() {
 	var cache = {};
 	return {

@@ -4,21 +4,34 @@ const saltRounds = 10;
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-	email: String,
-	password: String,
-	settings: {
-		language: String,
-		isPrivate: { type: Boolean, default: false }
-	}
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  settings: {
+    language: {
+      type: String,
+      default: "English",
+      trim: true,
+      enum: [
+        "English",
+        "French",
+        "German",
+        "Japanese",
+        "Chinese",
+        "Korean",
+        "Thai"
+      ]
+    },
+    isPrivate: { type: Boolean, default: false }
+  }
 });
 
 userSchema.pre("save", function(next) {
-	this.password = bcrypt.hashSync(this.password, saltRounds);
-	next();
+  this.password = bcrypt.hashSync(this.password, saltRounds);
+  next();
 });
 
 userSchema.methods.comparePassword = function(password) {
-	return bcrypt.compareSync(password, this.password);
+  return bcrypt.compareSync(password, this.password);
 };
 
 var User = mongoose.model("User", userSchema);
