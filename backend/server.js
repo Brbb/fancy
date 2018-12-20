@@ -25,7 +25,6 @@ app.use(function(err, req, res, next) {
 
 app.use("/api", router);
 
-// Load routes dynamically
 let routeFiles = fs.readdirSync("./routes");
 routeFiles.forEach(rf => {
 	app.use(`/api/${rf.replace(".js", "")}`, require(`./routes/${rf}`));

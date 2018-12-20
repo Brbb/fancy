@@ -4,8 +4,8 @@ const saltRounds = 10;
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  email: { type: String, required: true },
-  password: { type: String, required: true },
+  email: { type: String, required: true, trim: true },
+  password: { type: String, required: true, trim: true },
   settings: {
     language: {
       type: String,

@@ -1,0 +1,107 @@
+.f-dropdown {
+  font-size: 12px;
+  height: 35px;
+  min-width: 250px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  background: white;
+  border: #e1e4e8 solid 1px;
+  color: cornflowerblue;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.f-button {
+  display: block;
+  font-size: 12px;
+  min-width: 320px;
+  border: none;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  background: white;
+  border: #e1e4e8 solid 1px;
+  color: #59ced0;
+  cursor: pointer;
+  height: 40px;
+}
+
+.f-submit-button {
+  display: block;
+  font-size: 12px;
+  min-width: 320px;
+  height: 40px;
+  border: none;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  border-radius: 2px;
+  background-image: linear-gradient(262deg, #2eb3b6, #59ced0);
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.f-sidenav-button {
+  border: #e1e4e8 solid 1px;
+  color: cornflowerblue;
+  height: 40px;
+  width: 200px;
+  margin: 5px;
+}
+
+.f-bottom {
+  position: absolute;
+  margin-bottom: 10px;
+  bottom: 0px;
+}
+
+.f-input {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.f-input-field {
+  letter-spacing: 1px;
+  width: 305px;
+  height: 30px;
+  border: 1px solid #e1e4e8;
+  padding: 5px;
+}
+
+.f-input-field-label {
+  display: flex;
+  text-align: left;
+  font-size: 12px;
+  min-width: 250px;
+  font-weight: 100;
+  letter-spacing: 1px
+}
+
+.f-radio-label {
+  text-align: left;
+  font-size: 13px;
+  min-width: 250px;
+}
+
+.f-radio-button {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.f-radio-button-group {
+  text-align: left;
+  padding: 15px;
+}
+
+.f-message {
+  padding: 5px;
+}
+
+.f-message-s {
+  font-size: 10px;
+  color: green;
+}
+
+.f-message-e {
+  font-size: 10px;
+  color: red;
+}

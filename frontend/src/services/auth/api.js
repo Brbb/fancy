@@ -1,26 +1,29 @@
 import axios from "axios";
 
-var auth = {
-  isSignedIn: () => {
+function handleCatch(err) {
+  console.error(err);
+  return { err: err.message ? err.message : "Something went wrong" };
+}
+
+var api = {
+  isAuthorized: () => {
     let jwt = localStorage.getItem("jwt");
     return jwt != null;
   },
+
   login: (user, password) => {
     return axios
       .post("/api/auth/login", { email: user, password: password })
       .then(response => {
-        console.log(response)
         if (!response.data.err) {
           localStorage.setItem("jwt", response.data.token);
           localStorage.setItem("me", response.data.userid);
         }
         return response.data;
       })
-      .catch(err => {
-        console.log(err);
-        return { success: false, reason: err };
-      });
+      .catch(handleCatch);
   },
+
   signup: (user, password, repeatPassword) => {
     return axios
       .post("/api/auth/signup", {
@@ -29,26 +32,19 @@ var auth = {
         repeatPassword: repeatPassword
       })
       .then(response => {
-        return { success: true, payload: response };
+        return response.data;
       })
-      .catch(err => {
-        return {
-          success: false,
-          reason: "Error creating the new user, please retry!"
-        };
-      });
+      .catch(handleCatch);
   },
+
   logout: jwt => {
     return axios
       .post("/api/auth/logout")
       .then(response => {
-        return { success: true, payload: response.data };
+        return response.data;
       })
-      .catch(err => {
-        console.log(err);
-        return { success: false, reason: err };
-      });
+      .catch(handleCatch);
   }
 };
 
-export default auth;
+export default api;
