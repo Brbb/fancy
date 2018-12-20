@@ -44,11 +44,11 @@
   cursor: pointer;
   position: absolute;
   bottom: 0;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 .genericBtn {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-size: 12px;
   height: 35px;
   min-width: 250px;

@@ -46,7 +46,7 @@ class CreateAccount extends Component {
       <div className="CreateAccount formContainer">
         <form className="form" onSubmit={this.handleSubmit}>
           <label className="formTitle">Fancy App</label>
-          <label>Email</label>
+          <label className="textFieldLabel">Email</label>
           <input
             type="text"
             className="textField"
@@ -56,7 +56,7 @@ class CreateAccount extends Component {
             onChange={this.handleUserChange}
           />
 
-          <label>Password</label>
+          <label className="textFieldLabel">Password</label>
           <input
             type="password"
             placeholder="super secret"
