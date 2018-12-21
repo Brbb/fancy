@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./CreateAccount.css";
 import auth from "../../services/auth/api";
-import { Button, InputField, Message } from "../Elements/Elements";
+import {
+  Button,
+  InputField,
+  Message,
+  SectionTitle
+} from "../Elements/Elements";
 
 class CreateAccount extends Component {
   constructor() {
@@ -48,7 +53,7 @@ class CreateAccount extends Component {
   render() {
     return (
       <div className="f-section bordered centered">
-        <label className="f-section-title">Fancy App</label>
+        <SectionTitle text="New Account" />
         <InputField
           placeholder="user@email.com"
           value={this.state.username}

@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import "./Login.css";
-import auth from "../../services/auth/api";
-import { Button, InputField, Message } from "../Elements/Elements";
+import authApi from "../../services/auth/api";
+import userApi from "../../services/users/api";
+import {
+  Button,
+  InputField,
+  Message,
+  SectionTitle
+} from "../Elements/Elements";
 import { Link } from "react-router-dom";
 
 class Login extends Component {
@@ -25,13 +31,26 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   };
 
+  loadUser = async userId => {
+    let user = await userApi.getById(userId);
+    if (!user.err) {
+      this.setState({ user: user });
+      this.props.history.push({
+        pathname: "/settings",
+        state: { user: user }
+      });
+    } else {
+      this.props.history.push("/error");
+    }
+  };
+
   login = async () => {
-    var loginResult = await auth.login(
+    var loginResult = await authApi.login(
       this.state.username,
       this.state.password
     ); // SSL
     if (!loginResult.err) {
-      this.props.history.push("/settings");
+      this.loadUser(loginResult.userId);
     } else {
       this.setState({ error: loginResult.err });
     }
@@ -39,8 +58,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="f-section bordered centered f-card">
-        <label className="f-section-title">Fancy App</label>
+      <div className="f-section bordered centered">
+        <SectionTitle text="Login" />
         <InputField
           placeholder="user@email.com"
           value={this.state.username}
@@ -54,7 +73,7 @@ class Login extends Component {
           onChange={this.handlePassChange}
           text="Password"
         />
-        
+
         <Button
           className="f-submit-button"
           text="Login"

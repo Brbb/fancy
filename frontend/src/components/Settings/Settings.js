@@ -4,17 +4,16 @@ import Security from "../Security/Security";
 import General from "../General/General";
 import { Button } from "../Elements/Elements";
 import authApi from "../../services/auth/api";
-import userApi from "../../services/users/api";
 import languageApi from "../../services/lang/api";
 
 class Settings extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       languages: [],
       error: "",
       currentComponent: "test",
-      user: { settings: {} }
+      user: this.props.history.location.state.user
     };
   }
 
@@ -23,14 +22,6 @@ class Settings extends Component {
 
     let languages = languageApi.all();
     this.setState({ languages: languages });
-
-    let user = await userApi.getById(localStorage.getItem("me"));
-    if (!user.err) {
-      console.log(user);
-      this.setState({ user: user });
-    } else {
-      this.props.history.push("/error");
-    }
   }
 
   dismissError = () => {
@@ -78,7 +69,7 @@ class Settings extends Component {
             onClick={() => this.setState({ currentComponent: "security" })}
           />
           <Button
-            className="f-sidenav-button warning"
+            className="f-sidenav-button warning f-sidenav-logout"
             text="Logout"
             onClick={this.logout}
           />

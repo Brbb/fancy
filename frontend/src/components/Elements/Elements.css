@@ -1,12 +1,13 @@
 .f-dropdown {
   font-size: 12px;
   height: 35px;
-  min-width: 250px;
+  min-width: 320px;
+  width: 100%;
   border-radius: 10px;
   box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
   background: white;
   border: #e1e4e8 solid 1px;
-  color: cornflowerblue;
+  color: #59ced0;
   cursor: pointer;
   margin-top: 5px;
 }
@@ -40,13 +41,6 @@
   margin-bottom: 10px;
 }
 
-.f-sidenav-button {
-  border: #e1e4e8 solid 1px;
-  color: cornflowerblue;
-  height: 40px;
-  width: 200px;
-  margin: 5px;
-}
 
 .f-bottom {
   position: absolute;
@@ -70,10 +64,12 @@
 .f-input-field-label {
   display: flex;
   text-align: left;
-  font-size: 12px;
+  font-size: 10px;
   min-width: 250px;
-  font-weight: 100;
-  letter-spacing: 1px
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #4a4a4a;
+  margin-bottom: 2px;
 }
 
 .f-radio-label {
@@ -89,7 +85,8 @@
 
 .f-radio-button-group {
   text-align: left;
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .f-message {

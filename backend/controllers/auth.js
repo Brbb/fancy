@@ -30,7 +30,7 @@ module.exports = {
       );
     }
     return validUserPasswordCombination
-      ? { token: token, userid: user._id }
+      ? { token: token, userId: user._id }
       : { err: "Wrong username/password combination" };
   },
 

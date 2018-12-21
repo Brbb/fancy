@@ -86,3 +86,11 @@ export function Message({ text, success }) {
   const className = success ? "f-message-s" : "f-message-e";
   return <label className={"f-message " + className}>{text}</label>;
 }
+
+export function SectionTitle({ text }) {
+  return (
+    <div className="f-section-title">
+      <label>{text}</label>
+    </div>
+  );
+}

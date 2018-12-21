@@ -10,7 +10,7 @@ class Security extends Component {
       oldPassword: "",
       newPassword: "",
       repeatNewPassword: "",
-      outcome: { message: "", success: true },
+      outcome: { message: "", success: true }
     };
   }
 
@@ -51,6 +51,13 @@ class Security extends Component {
     }
   };
 
+  delete = async () => {
+    let result = api.delete(this.props.user);
+    if (!result.err) {
+      this.props.history.push("/");
+    }
+  };
+
   render() {
     return (
       <div>
@@ -66,14 +73,14 @@ class Security extends Component {
           />
           <InputField
             type="password"
-            placeholder="super secret"
+            placeholder="Enter your super secret"
             value={this.state.newPassword}
             onChange={this.handleNewPasswordChange}
             text="New Password"
           />
           <InputField
             type="password"
-            placeholder="repeat super secret"
+            placeholder="Repeat your super secret"
             value={this.state.repeatNewPassword}
             onChange={this.handleRepeatNewPasswordChange}
           />
@@ -88,7 +95,10 @@ class Security extends Component {
               this.state.newPassword !== this.state.repeatNewPassword
             }
           />
-          <Message text={this.state.outcome.message} success={this.state.outcome.success} />
+          <Message
+            text={this.state.outcome.message}
+            success={this.state.outcome.success}
+          />
         </div>
         <div className="f-section">
           <label className="f-section-title-no-margin warning-text">
@@ -102,7 +112,12 @@ class Security extends Component {
           <Button
             className="f-button warning"
             text="Delete"
-            onClick={this.delete}
+            onClick={() => {
+              if (
+                window.confirm("Are you sure you want to delete your profile?\n(You will be redirected to the login screen)")
+              )
+                this.delete();
+            }}
           />
         </div>
       </div>

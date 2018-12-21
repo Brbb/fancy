@@ -14,24 +14,36 @@
   font-weight: 800;
 }
 
-/* The sidebar menu */
 .f-sidenav {
-  height: 400px;
-  width: 250px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
   left: 0;
   background: white;
-  border-radius: 10px;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding: 20px;
+  overflow-x: hidden;
   margin: 20px;
-  border: solid 1px #e1e4e8
+  border-right: solid 1px #e1e4e8;
 }
 
-/* Style page content */
+.f-sidenav-button {
+  border: #e1e4e8 solid 1px;
+  color: #4a4a4a;
+  height: 40px;
+  width: 200px;
+  margin: 5px;
+  letter-spacing: 1px;
+}
+
+.f-sidenav-logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 25px; /*sidenav margin + button margin*/
+  margin-bottom: 60px;
+}
+
 .f-main {
-  margin-left: 50%; /* Same as the width of the sidebar */
+  margin-left: 50%;
   padding: 0px 10px;
 }

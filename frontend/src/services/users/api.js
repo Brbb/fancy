@@ -39,6 +39,14 @@ var api = {
         return result.data;
       })
       .catch(handleCatch);
+  },
+  delete: async user => {
+    return axiosInstance
+      .delete(`/api/users/${user.id}`)
+      .then(user => {
+        return user.data;
+      })
+      .catch(handleCatch);
   }
 };
 
