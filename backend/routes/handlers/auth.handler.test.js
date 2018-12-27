@@ -5,11 +5,21 @@ beforeAll(() => {
 	require("dotenv").config();
 });
 
+afterAll(()=>{
+	jest.resetAllMocks();
+	jest.restoreAllMocks();
+});
+
 describe("Auth handler methods", () => {
-	let res = {};
-	res.send = jest.fn(message => {
-		return message;
-	});
+	let res = {
+		send: jest.fn(payload => {
+			return payload;
+		}),
+		status: function() {
+			return this;
+		},
+		redirect: jest.fn()
+	};
   
 	describe("Request body check.", () => {
 		test("auth.login Returns 'Request needs body' for requests without body", () => {

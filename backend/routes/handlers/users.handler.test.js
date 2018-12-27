@@ -5,12 +5,21 @@ beforeAll(() => {
 	require("dotenv").config();
 });
 
+afterAll(() => {
+	jest.resetAllMocks();
+	jest.restoreAllMocks();
+});
+
 describe("Users handler methods", () => {
-	let res = {};
-	res.send = jest.fn(payload => {
-		return payload;
-	});
-	res.redirect = jest.fn();
+	let res = {
+		send: jest.fn(payload => {
+			return payload;
+		}),
+		status: function() {
+			return this;
+		},
+		redirect: jest.fn()
+	};
 
 	describe("Get all users", () => {
 		test("users.getAll returns the list of users", () => {
@@ -120,7 +129,6 @@ describe("Users handler methods", () => {
 		});
 
 		test("users.changePassword returns err==Passwords must match! for non-matching password error", () => {
-			
 			users
 				.changePassword(
 					{
@@ -173,7 +181,7 @@ describe("Users handler methods", () => {
 							repeatNewPassword: "newPass",
 							oldPassword: "oldPass"
 						},
-						params:{}
+						params: {}
 					},
 					res
 				)

@@ -5,6 +5,11 @@ beforeAll(() => {
 	require("dotenv").config();
 });
 
+afterAll(()=>{
+	jest.resetAllMocks();
+	jest.restoreAllMocks();
+});
+
 describe("User controller functionalities", () => {
 	describe("Retrieve all users", () => {
 		test("usersApi.all: returns users without password field", () => {

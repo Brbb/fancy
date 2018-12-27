@@ -16,7 +16,7 @@ var auth = (module.exports = {
 			}),
 
 	login: async (email, password) => {
-		var user = auth.verifyUserPassword(email, password);
+		var user = await auth.verifyUserPassword(email, password);
 		if (user) {
 			let token = auth.getToken(user.email);
 			return { token: token, userId: user._id };

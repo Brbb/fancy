@@ -5,6 +5,11 @@ beforeAll(() => {
 	require("dotenv").config();
 });
 
+afterAll(()=>{
+	jest.resetAllMocks();
+	jest.restoreAllMocks();
+});
+
 describe("Auth controller functionalities", () => {
 	describe("User creation", () => {
 		test("auth.create: returns a User with an _id", () => {

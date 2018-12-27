@@ -1,11 +1,11 @@
 const request = require("supertest");
 const app = require("./app");
-const auth = jest.genMockFromModule("./controllers/auth");
+const auth = require("./controllers/auth");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
 //mock the creation of a token in the login
-auth.getToken = jest.fn(() => {
+jest.spyOn(auth, "getToken").mockImplementationOnce(() => {
 	return jwt.sign(
 		{ email: "nobody", jti: crypto.randomBytes(16).toString("hex") },
 		process.env.TOKEN_SECRET,
