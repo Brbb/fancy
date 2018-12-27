@@ -1,4 +1,4 @@
-const handler = require("../handlers/users");
+const handler = require("./handlers/users.handler");
 const express = require("express");
 const router = express.Router();
 const handle = require("../helpers/promiseHelper").handle;

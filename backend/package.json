@@ -4,7 +4,7 @@
   "description": "Fancy backend",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose --coverage --collectCoverageFrom=**/*.{js} --collectCoverageFrom=!**/*.{config,setup}.js  --detectOpenHandles --forceExit --runInBand --setupFiles='<rootDir>/jest.setup.js' ",
     "start": "nodemon server.js",
     "pretest": "eslint ."
   },
@@ -22,8 +22,12 @@
   },
   "devDependencies": {
     "eslint": "^5.10.0",
-    "nodemon": "^1.18.9",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "sinon": "^7.2.2",
+    "supertest": "^3.3.0"
   }
 }
