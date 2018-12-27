@@ -8,9 +8,6 @@ module.exports = (function() {
 		},
 		set: function(key, val) {
 			cache[key] = val;
-		},
-		keys: function() {
-			return Object.keys(cache);
 		}
 	};
 })();

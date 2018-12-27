@@ -7,3 +7,4 @@ backend/.env
 node_modules/
 frontend/.env
 dump.rdb
+backend/coverage/

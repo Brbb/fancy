@@ -6,7 +6,6 @@ const axiosInstance = axios.create({
 });
 
 function handleCatch(err) {
-  console.error(err);
   return { err: err.message ? err.message : "Something went wrong" };
 }
 
