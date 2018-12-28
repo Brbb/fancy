@@ -49,6 +49,7 @@ class Login extends Component {
       this.state.username,
       this.state.password
     ); // SSL
+    console.log(loginResult)
     if (!loginResult.err) {
       this.loadUser(loginResult.userId);
     } else {

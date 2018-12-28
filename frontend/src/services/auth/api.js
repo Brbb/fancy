@@ -1,7 +1,7 @@
 import axios from "axios";
 
-function handleCatch(err) {
-  return { err: err.message ? err.message : "Something went wrong" };
+function handleCatch(error) {
+  return { err: error.response.data.err ? error.response.data.err : "Something went wrong" };
 }
 
 var api = {
