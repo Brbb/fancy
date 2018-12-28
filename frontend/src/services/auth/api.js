@@ -1,7 +1,11 @@
 import axios from "axios";
 
 function handleCatch(error) {
-  return { err: error.response.data.err ? error.response.data.err : "Something went wrong" };
+  return {
+    err: error.response.data.err
+      ? error.response.data.err
+      : "Something went wrong"
+  };
 }
 
 var api = {
@@ -14,10 +18,6 @@ var api = {
     return axios
       .post("/api/auth/login", { email: user, password: password })
       .then(response => {
-        if (!response.data.err) {
-          localStorage.setItem("jwt", response.data.token);
-          localStorage.setItem("me", response.data.userid);
-        }
         return response.data;
       })
       .catch(handleCatch);

@@ -10,6 +10,7 @@ class Security extends Component {
       oldPassword: "",
       newPassword: "",
       repeatNewPassword: "",
+      onUserSettingsChange: () => {},
       outcome: { message: "", success: true }
     };
   }
@@ -40,7 +41,7 @@ class Security extends Component {
     );
 
     if (!result.err) {
-      this.props.history.push("/");
+      await this.props.onUserSettingsChange()
     } else {
       this.setState({
         outcome: {
@@ -52,9 +53,10 @@ class Security extends Component {
   };
 
   delete = async () => {
-    let result = api.delete(this.props.user);
+    let result = await api.delete(this.props.user);
+    console.log(result)
     if (!result.err) {
-      this.props.history.push("/");
+      await this.props.onUserSettingsChange()
     }
   };
 
@@ -114,7 +116,9 @@ class Security extends Component {
             text="Delete"
             onClick={() => {
               if (
-                window.confirm("Are you sure you want to delete your profile?\n(You will be redirected to the login screen)")
+                window.confirm(
+                  "Are you sure you want to delete your profile?\n(You will be redirected to the login screen)"
+                )
               )
                 this.delete();
             }}

@@ -14,7 +14,6 @@ var api = {
     return axiosInstance
       .get(`/api/users/${id}`)
       .then(user => {
-        console.log(user);
         return user.data;
       })
       .catch(handleCatch);

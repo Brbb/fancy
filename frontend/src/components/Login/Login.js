@@ -49,9 +49,10 @@ class Login extends Component {
       this.state.username,
       this.state.password
     ); // SSL
-    console.log(loginResult)
     if (!loginResult.err) {
-      this.loadUser(loginResult.userId);
+      localStorage.setItem("jwt", loginResult.token);
+      localStorage.setItem("me", loginResult.userid);
+      await this.loadUser(loginResult.userId);
     } else {
       this.setState({ error: loginResult.err });
     }

@@ -44,7 +44,7 @@ class Settings extends Component {
   render() {
     let mainAreaComponent =
       this.state.currentComponent === "security" ? (
-        <Security user={this.state.user} />
+        <Security user={this.state.user} onUserSettingsChange={this.logout} />
       ) : (
         <General languages={this.state.languages} user={this.state.user} />
       );
