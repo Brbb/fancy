@@ -8,7 +8,6 @@ import {
   Message,
   SectionTitle
 } from "../Elements/Elements";
-import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -18,7 +17,22 @@ class Login extends Component {
       password: "",
       error: ""
     };
+
+    //this.loadUser = this.loadUser.bind(this);
+    this.login = this.login.bind(this);
   }
+
+  loadUser = async userId => {
+    let user = await userApi.getById(userId);
+    if (!user.err) {
+      this.props.history.push({
+        pathname: "/settings",
+        state: { user: user }
+      });
+    } else {
+      this.props.history.push("/error");
+    }
+  };
 
   dismissError = () => {
     this.setState({ error: "" });
@@ -31,20 +45,7 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   };
 
-  loadUser = async userId => {
-    let user = await userApi.getById(userId);
-    if (!user.err) {
-      this.setState({ user: user });
-      this.props.history.push({
-        pathname: "/settings",
-        state: { user: user }
-      });
-    } else {
-      this.props.history.push("/error");
-    }
-  };
-
-  login = async () => {
+  async login() {
     var loginResult = await authApi.login(
       this.state.username,
       this.state.password
@@ -56,7 +57,7 @@ class Login extends Component {
     } else {
       this.setState({ error: loginResult.err });
     }
-  };
+  }
 
   render() {
     return (
@@ -77,14 +78,22 @@ class Login extends Component {
         />
 
         <Button
+          name="login-button"
           className="f-submit-button"
           text="Login"
           onClick={this.login}
           disabled={this.state.username === "" || this.state.password === ""}
         />
-        <Link to="/new">
-          <Button className="f-button" text="Create new account" />
-        </Link>
+
+        <Button
+          name="create-button"
+          className="f-button"
+          text="Create new account"
+          onClick={() => {
+            this.props.history.push("/new");
+          }}
+        />
+
         <Message text={this.state.error} success={this.state.error === ""} />
       </div>
     );

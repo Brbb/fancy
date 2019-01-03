@@ -9,6 +9,11 @@ import languageApi from "../../services/lang/api";
 class Settings extends Component {
   constructor(props) {
     super(props);
+
+    if (!this.props.history.location.state) {
+      this.props.history.location.state = { user: {} };
+    }
+
     this.state = {
       languages: [],
       error: "",
@@ -18,8 +23,6 @@ class Settings extends Component {
   }
 
   async componentDidMount() {
-    if (!authApi.isAuthorized()) this.props.history.push("/");
-
     let languages = languageApi.all();
     this.setState({ languages: languages });
   }

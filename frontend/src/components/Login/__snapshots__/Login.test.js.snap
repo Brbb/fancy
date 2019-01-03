@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login component Rendering tests Login mounts and evaluates state correctly 1`] = `
+<div
+  className="f-section bordered centered"
+>
+  <div
+    className="f-section-title"
+  >
+    <label>
+      Login
+    </label>
+  </div>
+  <div
+    className="f-input"
+  >
+    <label
+      className="f-input-field-label"
+    >
+      Email
+    </label>
+    <input
+      className="f-input-field"
+      onChange={[Function]}
+      placeholder="user@email.com"
+      value="test"
+    />
+  </div>
+  <div
+    className="f-input"
+  >
+    <label
+      className="f-input-field-label"
+    >
+      Password
+    </label>
+    <input
+      className="f-input-field"
+      onChange={[Function]}
+      placeholder="super secret"
+      type="password"
+      value="12345"
+    />
+  </div>
+  <input
+    className="f-submit-button"
+    disabled={false}
+    name="login-button"
+    onClick={[Function]}
+    type="button"
+    value="Login"
+  />
+  <input
+    className="f-button"
+    name="create-button"
+    onClick={[Function]}
+    type="button"
+    value="Create new account"
+  />
+  <label
+    className="f-message f-message-s"
+  />
+</div>
+`;
+
+exports[`Login component Rendering tests Login shallow-renders correctly 1`] = `
+<div
+  className="f-section bordered centered"
+>
+  <SectionTitle
+    text="Login"
+  />
+  <InputField
+    onChange={[Function]}
+    placeholder="user@email.com"
+    text="Email"
+    value=""
+  />
+  <InputField
+    onChange={[Function]}
+    placeholder="super secret"
+    text="Password"
+    type="password"
+    value=""
+  />
+  <Button
+    className="f-submit-button"
+    disabled={true}
+    name="login-button"
+    onClick={[Function]}
+    text="Login"
+  />
+  <Button
+    className="f-button"
+    name="create-button"
+    onClick={[Function]}
+    text="Create new account"
+  />
+  <Message
+    success={true}
+    text=""
+  />
+</div>
+`;
