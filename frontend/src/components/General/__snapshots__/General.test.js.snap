@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`General component Rendering tests General renders and assigns user settings correctly 1`] = `
+<div
+  className="f-section"
+>
+  <label
+    className="f-section-title-no-margin"
+  >
+    Preferences
+  </label>
+  <hr
+    className="f-hr-section"
+  />
+  <Dropdown
+    onChange={[Function]}
+    selected="Chinese"
+    text="Language"
+  />
+  <RadioButtonGroup
+    checkedValue="public"
+    label="Privacy"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "text": "Private",
+          "value": "private",
+        },
+        Object {
+          "text": "Public",
+          "value": "public",
+        },
+      ]
+    }
+  />
+  <Button
+    className="f-submit-button"
+    onClick={[Function]}
+    text="Save changes"
+  />
+  <Message
+    success={true}
+    text=""
+  />
+</div>
+`;
+
+exports[`General component Rendering tests Select language updates settings correctly 1`] = `
+<div
+  className="f-section"
+>
+  <label
+    className="f-section-title-no-margin"
+  >
+    Preferences
+  </label>
+  <hr
+    className="f-hr-section"
+  />
+  <Dropdown
+    onChange={[Function]}
+    selected="Chinese"
+    text="Language"
+  />
+  <RadioButtonGroup
+    checkedValue="public"
+    label="Privacy"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "text": "Private",
+          "value": "private",
+        },
+        Object {
+          "text": "Public",
+          "value": "public",
+        },
+      ]
+    }
+  />
+  <Button
+    className="f-submit-button"
+    onClick={[Function]}
+    text="Save changes"
+  />
+  <Message
+    success={true}
+    text=""
+  />
+</div>
+`;
+
+exports[`General component Rendering tests Select privacy updates settings correctly 1`] = `
+<div
+  className="f-section"
+>
+  <label
+    className="f-section-title-no-margin"
+  >
+    Preferences
+  </label>
+  <hr
+    className="f-hr-section"
+  />
+  <Dropdown
+    onChange={[Function]}
+    selected="Thai"
+    text="Language"
+  />
+  <RadioButtonGroup
+    checkedValue="public"
+    label="Privacy"
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "text": "Private",
+          "value": "private",
+        },
+        Object {
+          "text": "Public",
+          "value": "public",
+        },
+      ]
+    }
+  />
+  <Button
+    className="f-submit-button"
+    onClick={[Function]}
+    text="Save changes"
+  />
+  <Message
+    success={true}
+    text=""
+  />
+</div>
+`;

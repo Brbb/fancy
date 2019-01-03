@@ -21,9 +21,10 @@ exports[`Login component Rendering tests Login mounts and evaluates state correc
     </label>
     <input
       className="f-input-field"
+      name="emailField"
       onChange={[Function]}
       placeholder="user@email.com"
-      value="test"
+      value="testemail@provider.com"
     />
   </div>
   <div
@@ -36,15 +37,16 @@ exports[`Login component Rendering tests Login mounts and evaluates state correc
     </label>
     <input
       className="f-input-field"
+      name="passwordField"
       onChange={[Function]}
       placeholder="super secret"
       type="password"
-      value="12345"
+      value=""
     />
   </div>
   <input
     className="f-submit-button"
-    disabled={false}
+    disabled={true}
     name="login-button"
     onClick={[Function]}
     type="button"
@@ -71,12 +73,14 @@ exports[`Login component Rendering tests Login shallow-renders correctly 1`] = `
     text="Login"
   />
   <InputField
+    name="emailField"
     onChange={[Function]}
     placeholder="user@email.com"
     text="Email"
     value=""
   />
   <InputField
+    name="passwordField"
     onChange={[Function]}
     placeholder="super secret"
     text="Password"

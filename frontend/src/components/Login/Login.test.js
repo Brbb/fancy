@@ -5,32 +5,25 @@ import userApi from "../../services/users/api";
 describe("Login component", () => {
   describe("Rendering tests", () => {
     test("Login shallow-renders correctly", () => {
-      const wrapper = shallow(<Login />);
+      let wrapper = shallow(<Login />);
       expect(wrapper).toMatchSnapshot();
     });
 
     test("Login mounts and evaluates state correctly", () => {
-      const wrapper = mount(<Login />);
-      wrapper.setState({ username: "test", password: "12345" });
+      let wrapper = mount(<Login />);
+      wrapper
+        .find('[name="emailField"]')
+        .last()
+        .simulate("change", { target: { value: "testemail@provider.com" } });
+
       expect(wrapper).toMatchSnapshot();
-      expect(
-        wrapper
-          .find({ value: "test" })
-          .first()
-          .text()
-      ).toEqual("Email");
-      expect(
-        wrapper
-          .find({ value: "12345" })
-          .first()
-          .text()
-      ).toEqual("Password");
+      expect(wrapper.state().username).toEqual("testemail@provider.com");
     });
   });
 
   describe("Props tests", () => {
     test("Login button is disabled if one InputField is empty", () => {
-      const wrapper = shallow(<Login />);
+      let wrapper = shallow(<Login />);
       wrapper.setState({ username: "test" });
       const loginButton = wrapper.find("Button").first();
       expect(loginButton.prop("name")).toEqual("login-button");
@@ -38,7 +31,7 @@ describe("Login component", () => {
     });
 
     test("Login button is enabled if the InputFields have value", () => {
-      const wrapper = shallow(<Login />);
+      let wrapper = shallow(<Login />);
       wrapper.setState({ username: "test", password: "1234" });
       const loginButton = wrapper.find("Button").first();
       expect(loginButton.prop("name")).toEqual("login-button");
@@ -55,7 +48,7 @@ describe("Login component", () => {
           locationMock.pathname = "/new";
         })
       };
-      const wrapper = shallow(<Login history={historyMock} />);
+      let wrapper = shallow(<Login history={historyMock} />);
       const createButton = wrapper.find("[name='create-button']").first();
       createButton.simulate("click");
 
@@ -72,7 +65,7 @@ describe("Login component", () => {
           locationMock.state = payload.state;
         })
       };
-      const wrapper = mount(<Login history={historyMock} />);
+      let wrapper = mount(<Login history={historyMock} />);
       const mockUser = function(id) {
         return {
           settings: {
@@ -101,7 +94,7 @@ describe("Login component", () => {
 
   describe("Login API call result (MOCK)", () => {
     test("Backend returns error and <Login /> displays it properly", () => {
-      const wrapper = mount(<Login />);
+      let wrapper = mount(<Login />);
 
       jest.spyOn(authApi, "login").mockImplementation(() => {
         return Promise.resolve({ err: "anyerror" });
@@ -127,7 +120,7 @@ describe("Login component", () => {
         return Promise.resolve({ token: "asd123", userid: 12345 });
       });
 
-      const wrapper = mount(<Login />);
+      let wrapper = mount(<Login />);
       const spyLoadUser = jest
         .spyOn(wrapper.instance(), "loadUser")
         .mockImplementationOnce(() => {
@@ -148,7 +141,3 @@ describe("Login component", () => {
     });
   });
 });
-
-// 1. test loadUser
-// 2. test handleChange
-// 3. test navigation to

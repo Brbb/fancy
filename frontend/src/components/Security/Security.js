@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, InputField, Message } from "../Elements/Elements";
+import { Button, InputField, Message } from "../Elements/Basics";
+import PasswordGroup from "../Elements/PasswordGroup";
 import api from "../../services/users/api";
 import { withRouter } from "react-router-dom";
 
@@ -11,25 +12,12 @@ class Security extends Component {
       newPassword: "",
       repeatNewPassword: "",
       onUserSettingsChange: () => {},
-      outcome: { message: "", success: true }
+      error: ""
     };
   }
 
   handleOldPasswordChange = event => {
     this.setState({ oldPassword: event.target.value });
-  };
-
-  handleNewPasswordChange = event => {
-    this.setState({ newPassword: event.target.value });
-  };
-
-  handleRepeatNewPasswordChange = event => {
-    if (this.state.newPassword !== event.target.value) {
-      this.setState({ error: "Passwords must match" });
-    } else {
-      this.setState({ error: "" });
-    }
-    this.setState({ repeatNewPassword: event.target.value });
   };
 
   save = async () => {
@@ -40,23 +28,24 @@ class Security extends Component {
       this.state.repeatNewPassword
     );
 
+    // logout
     if (!result.err) {
-      await this.props.onUserSettingsChange()
+      await this.props.onUserSettingsChange();
     } else {
       this.setState({
-        outcome: {
-          message: result.err,
-          success: false
-        }
+        error: result.err
       });
     }
   };
 
   delete = async () => {
     let result = await api.delete(this.props.user);
-    console.log(result)
     if (!result.err) {
-      await this.props.onUserSettingsChange()
+      await this.props.onUserSettingsChange();
+    } else {
+      this.setState({
+        error: "User not deleted!"
+      });
     }
   };
 
@@ -67,26 +56,24 @@ class Security extends Component {
           <label className="f-section-title-no-margin">Change Password</label>
           <hr className="f-hr-section" />
           <InputField
+            name="oldPasswordField"
             type="password"
             placeholder="Old password"
             value={this.state.oldPassword}
             onChange={this.handleOldPasswordChange}
             text="Old Password"
           />
-          <InputField
-            type="password"
-            placeholder="Enter your super secret"
-            value={this.state.newPassword}
-            onChange={this.handleNewPasswordChange}
-            text="New Password"
-          />
-          <InputField
-            type="password"
-            placeholder="Repeat your super secret"
-            value={this.state.repeatNewPassword}
-            onChange={this.handleRepeatNewPasswordChange}
+          <PasswordGroup
+            onPasswordsChange={(newPassword, repeatPassword, error) => {
+              this.setState({
+                newPassword: newPassword,
+                repeatNewPassword: repeatPassword,
+                error: error
+              });
+            }}
           />
           <Button
+            name="save-button"
             className="f-submit-button"
             text="Save Changes"
             onClick={this.save}
@@ -97,10 +84,7 @@ class Security extends Component {
               this.state.newPassword !== this.state.repeatNewPassword
             }
           />
-          <Message
-            text={this.state.outcome.message}
-            success={this.state.outcome.success}
-          />
+          <Message text={this.state.error} success={this.state.error === ""} />
         </div>
         <div className="f-section">
           <label className="f-section-title-no-margin warning-text">
@@ -112,6 +96,7 @@ class Security extends Component {
             your profile and saved settings.
           </p>
           <Button
+            name="delete-button"
             className="f-button warning"
             text="Delete"
             onClick={() => {
@@ -120,7 +105,7 @@ class Security extends Component {
                   "Are you sure you want to delete your profile?\n(You will be redirected to the login screen)"
                 )
               )
-                this.delete();
+                return this.delete();
             }}
           />
         </div>

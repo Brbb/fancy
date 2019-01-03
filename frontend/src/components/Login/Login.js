@@ -7,7 +7,7 @@ import {
   InputField,
   Message,
   SectionTitle
-} from "../Elements/Elements";
+} from "../Elements/Basics";
 
 class Login extends Component {
   constructor() {
@@ -68,6 +68,7 @@ class Login extends Component {
           value={this.state.username}
           onChange={this.handleUserChange}
           text="Email"
+          name="emailField"
         />
         <InputField
           type="password"
@@ -75,6 +76,7 @@ class Login extends Component {
           value={this.state.password}
           onChange={this.handlePassChange}
           text="Password"
+          name="passwordField"
         />
 
         <Button

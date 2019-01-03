@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import "./CreateAccount.css";
 import auth from "../../services/auth/api";
-import {
-  Button,
-  InputField,
-  Message,
-  SectionTitle
-} from "../Elements/Elements";
+import { Button, InputField, Message, SectionTitle } from "../Elements/Basics";
+import PasswordGroup from "../Elements/PasswordGroup";
 
 class CreateAccount extends Component {
   constructor() {
@@ -19,24 +15,8 @@ class CreateAccount extends Component {
     };
   }
 
-  dismissError = () => {
-    this.setState({ error: "" });
-  };
-
   handleUserChange = event => {
     this.setState({ username: event.target.value });
-  };
-  handlePassChange = event => {
-    if (this.state.repeatPassword !== event.target.value) {
-      this.setState({ error: "Passwords must match" });
-    } else this.dismissError();
-    this.setState({ password: event.target.value });
-  };
-  handleRepeatPassChange = event => {
-    if (this.state.password !== event.target.value) {
-      this.setState({ error: "Passwords must match" });
-    } else this.dismissError();
-    this.setState({ repeatPassword: event.target.value });
   };
 
   signup = async () => {
@@ -55,25 +35,23 @@ class CreateAccount extends Component {
       <div className="f-section bordered centered">
         <SectionTitle text="New Account" />
         <InputField
+          name="emailField"
           placeholder="user@email.com"
           value={this.state.username}
           onChange={this.handleUserChange}
           text="Email"
         />
-        <InputField
-          type="password"
-          placeholder="super secret"
-          value={this.state.password}
-          onChange={this.handlePassChange}
-          text="Password"
-        />
-        <InputField
-          type="password"
-          placeholder="repeat super secret"
-          value={this.state.repeatPassword}
-          onChange={this.handleRepeatPassChange}
+        <PasswordGroup
+          onPasswordsChange={(newPassword, repeatPassword, error) => {
+            this.setState({
+              password: newPassword,
+              repeatPassword: repeatPassword,
+              error: error
+            });
+          }}
         />
         <Button
+          name="create-button"
           className="f-submit-button"
           text="Create New Account"
           onClick={this.signup}
@@ -83,6 +61,11 @@ class CreateAccount extends Component {
             this.state.repeatPassword === "" ||
             this.state.error !== ""
           }
+        />
+        <Button
+          className="f-button"
+          text="← Back"
+          onClick={() => this.props.history.push("/")}
         />
         <Message text={this.state.error} success={this.state.error === ""} />
       </div>

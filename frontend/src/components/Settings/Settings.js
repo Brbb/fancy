@@ -2,17 +2,13 @@ import React, { Component } from "react";
 import "./Settings.css";
 import Security from "../Security/Security";
 import General from "../General/General";
-import { Button } from "../Elements/Elements";
+import { Button } from "../Elements/Basics";
 import authApi from "../../services/auth/api";
 import languageApi from "../../services/lang/api";
 
 class Settings extends Component {
   constructor(props) {
     super(props);
-
-    if (!this.props.history.location.state) {
-      this.props.history.location.state = { user: {} };
-    }
 
     this.state = {
       languages: [],
@@ -26,17 +22,6 @@ class Settings extends Component {
     let languages = languageApi.all();
     this.setState({ languages: languages });
   }
-
-  dismissError = () => {
-    this.setState({ error: "" });
-  };
-
-  handleUserChange = event => {
-    this.setState({ username: event.target.value });
-  };
-  handlePassChange = event => {
-    this.setState({ password: event.target.value });
-  };
 
   logout = async () => {
     localStorage.removeItem("jwt");
@@ -61,6 +46,7 @@ class Settings extends Component {
               (this.state.currentComponent === "general" ? "f-active" : "")
             }
             text="General"
+            name="general-button"
             onClick={() => this.setState({ currentComponent: "general" })}
           />
           <Button
@@ -69,9 +55,11 @@ class Settings extends Component {
               (this.state.currentComponent === "security" ? "f-active" : "")
             }
             text="Security"
+            name="security-button"
             onClick={() => this.setState({ currentComponent: "security" })}
           />
           <Button
+            name="logout-button"
             className="f-sidenav-button warning f-sidenav-logout"
             text="Logout"
             onClick={this.logout}

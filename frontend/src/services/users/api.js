@@ -10,7 +10,7 @@ function getAxiosConfig() {
 }
 
 function handleCatch(err) {
-  return { err: err.message ? err.message : "Something went wrong" };
+  return { err: err.response.data.err ? err.response.data.err : "Something went wrong" };
 }
 
 var api = {
