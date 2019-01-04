@@ -4,7 +4,7 @@ import {
   RadioButtonGroup,
   Button,
   Message
-} from "../Elements/Elements";
+} from "../Elements/Basics";
 import { withRouter } from "react-router-dom";
 import userApi from "../../services/users/api";
 
@@ -20,6 +20,9 @@ class General extends Component {
     };
   }
 
+  // Tradeoff: I might save every time I change a property or once I press the save button.
+  // The major problem is that on save error I should reset the state, but refreshing the page already works, worst case.
+  // Saving at any property change calls the API N times where N is the number of changes. 
   save = async () => {
     let result = await userApi.update(this.props.user);
     if (!result.err) {

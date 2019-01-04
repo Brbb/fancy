@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login component, integration test Login successful User types email and passwords, clicks on login and goes to /settings. 1`] = `
+<div
+  className="f-section bordered centered"
+>
+  <div
+    className="f-section-title"
+  >
+    <label>
+      Login
+    </label>
+  </div>
+  <div
+    className="f-input"
+  >
+    <label
+      className="f-input-field-label"
+    >
+      Email
+    </label>
+    <input
+      className="f-input-field"
+      name="emailField"
+      onChange={[Function]}
+      placeholder="user@email.com"
+      value="test@email.com"
+    />
+  </div>
+  <div
+    className="f-input"
+  >
+    <label
+      className="f-input-field-label"
+    >
+      Password
+    </label>
+    <input
+      className="f-input-field"
+      name="passwordField"
+      onChange={[Function]}
+      placeholder="super secret"
+      type="password"
+      value="pass123"
+    />
+  </div>
+  <input
+    className="f-submit-button"
+    disabled={false}
+    name="login-button"
+    onClick={[Function]}
+    type="button"
+    value="Login"
+  />
+  <input
+    className="f-button"
+    name="create-button"
+    onClick={[Function]}
+    type="button"
+    value="Create new account"
+  />
+  <label
+    className="f-message f-message-s"
+  />
+</div>
+`;

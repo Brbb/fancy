@@ -54,19 +54,35 @@ npm start
 
 ## Test
 
-### What is tested?
+#### Unit test
 
-The __single units__ using unit tests. These units have been isolated using mocks to exclude database calls and split the behavior in the smallest micro-behaviors possible.
+The __single units__ using unit tests. These units have been isolated using mocks to exclude database calls and split the behavior in the smallest micro-behaviors possible. Matching unit test files are in the same folder of the tested module/class/unit.
 
 After the test it's possible to check the coverage in `/backend/coverage/lcov-report/index.html`
 
-**Note**: some little parts have been ignored because the test is either insignificant or trivial (eg. `server.js` requires `app.js` and `mongoose`, but I trust the require module to do its job).
-________
+**Note**: some parts have been ignored because the test is either insignificant or trivial (eg. `server.js` requires `app.js` and `mongoose`, but I trust the require module to do its job).
+Other parts like the `Routes` or the `localStorage` have been partially tested either because it's implicit in the `expect` or because we trust the language (for example `localStorage.setItem` shouldn't fail).
+
+#### Integration test
 
 Some "big bang style" integration tests for the main functionalities without trying all the possible combinations of the composing segments.
+Some "functional test" all the way to the database for the backend and some "integration/functional test" from the button click to the mock of the `axios` call.
+
 This because the amount of time required is well beyond my availability. 
 
+These tests have the file name matching `*.int.test.js` or are stored in the `__test__` folder.
+
+#### Blackbox
+
+Black-box tests are shown with supertest on the backend and snapshots on the frontend.
+
+#### Manual test
+
+Random actions to cover the main functionalities manually.
+
 ### Execute the test
+
+#### Backend test
 
 ESLint is configured to check syntax in a pretest. In order to have the code fixed, run from the [`/backend`](https://github.com/Brbb/fancy/tree/master/backend) folder:
 
@@ -80,6 +96,10 @@ npm test
 ```
 
 This will run the unit tests (file `.test.js` near each file) and the integration tests in the `__test__` folder.
+
+#### Frontend test
+
+From the [`/frontend`](https://github.com/Brbb/fancy/tree/master/frontend) folder execute npm test. The `react-script test` command is configured to work with Jest and Enzyme.
 
 ## Project structure
 Backend and frontend have been separated in subfolders to allow a future possible division in multiple repositories. 
@@ -137,3 +157,11 @@ login: async (email, password) => {
 
 ### Frontend
 
+The structure includes the `src` folder and the following subfolders:
+
+  * components → The components divided by concern + UI Elements
+  * routes
+  * services → API clients for auth, language and users
+  * other config and application files
+
+At startup, `src/index.js` will render `<App />`, which contains the Routes and matching paths to the components.

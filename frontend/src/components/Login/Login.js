@@ -2,39 +2,24 @@ import React, { Component } from "react";
 import "./Login.css";
 import authApi from "../../services/auth/api";
 import userApi from "../../services/users/api";
-import {
-  Button,
-  InputField,
-  Message,
-  SectionTitle
-} from "../Elements/Elements";
-import { Link } from "react-router-dom";
+import { Button, InputField, Message, SectionTitle } from "../Elements/Basics";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
       error: ""
     };
+
+    //this.loadUser = this.loadUser.bind(this);
+    this.login = this.login.bind(this);
   }
-
-  dismissError = () => {
-    this.setState({ error: "" });
-  };
-
-  handleUserChange = event => {
-    this.setState({ username: event.target.value });
-  };
-  handlePassChange = event => {
-    this.setState({ password: event.target.value });
-  };
 
   loadUser = async userId => {
     let user = await userApi.getById(userId);
     if (!user.err) {
-      this.setState({ user: user });
       this.props.history.push({
         pathname: "/settings",
         state: { user: user }
@@ -44,19 +29,26 @@ class Login extends Component {
     }
   };
 
-  login = async () => {
+  handleUserChange = event => {
+    this.setState({ username: event.target.value });
+  };
+  handlePassChange = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  async login() {
     var loginResult = await authApi.login(
       this.state.username,
       this.state.password
     ); // SSL
     if (!loginResult.err) {
       localStorage.setItem("jwt", loginResult.token);
-      localStorage.setItem("me", loginResult.userid);
+      localStorage.setItem("me", loginResult.userId);
       await this.loadUser(loginResult.userId);
     } else {
       this.setState({ error: loginResult.err });
     }
-  };
+  }
 
   render() {
     return (
@@ -67,6 +59,7 @@ class Login extends Component {
           value={this.state.username}
           onChange={this.handleUserChange}
           text="Email"
+          name="emailField"
         />
         <InputField
           type="password"
@@ -74,17 +67,26 @@ class Login extends Component {
           value={this.state.password}
           onChange={this.handlePassChange}
           text="Password"
+          name="passwordField"
         />
 
         <Button
+          name="login-button"
           className="f-submit-button"
           text="Login"
           onClick={this.login}
           disabled={this.state.username === "" || this.state.password === ""}
         />
-        <Link to="/new">
-          <Button className="f-button" text="Create new account" />
-        </Link>
+
+        <Button
+          name="create-button"
+          className="f-button"
+          text="Create new account"
+          onClick={() => {
+            this.props.history.push("/new");
+          }}
+        />
+
         <Message text={this.state.error} success={this.state.error === ""} />
       </div>
     );

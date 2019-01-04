@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serrings component Rendering tests Settings shallow-renders correctly 1`] = `
+<div>
+  <div
+    className="f-sidenav"
+  >
+    <Button
+      className="f-sidenav-button "
+      name="general-button"
+      onClick={[Function]}
+      text="General"
+    />
+    <Button
+      className="f-sidenav-button "
+      name="security-button"
+      onClick={[Function]}
+      text="Security"
+    />
+    <Button
+      className="f-sidenav-button warning f-sidenav-logout"
+      name="logout-button"
+      onClick={[Function]}
+      text="Logout"
+    />
+  </div>
+  <div
+    className="f-main"
+  >
+    <withRouter(General)
+      languages={
+        Array [
+          "English",
+          "French",
+          "German",
+          "Japanese",
+          "Chinese",
+          "Korean",
+          "Thai",
+        ]
+      }
+      user="dummy"
+    />
+  </div>
+</div>
+`;

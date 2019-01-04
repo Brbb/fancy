@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Security component Rendering tests Save button gets enabled correctly on field/state changes 1`] = `
+<div>
+  <div
+    className="f-section"
+  >
+    <label
+      className="f-section-title-no-margin"
+    >
+      Change Password
+    </label>
+    <hr
+      className="f-hr-section"
+    />
+    <div
+      className="f-input"
+    >
+      <label
+        className="f-input-field-label"
+      >
+        Old Password
+      </label>
+      <input
+        className="f-input-field"
+        name="oldPasswordField"
+        onChange={[Function]}
+        placeholder="Old password"
+        type="password"
+        value="old"
+      />
+    </div>
+    <div>
+      <div
+        className="f-input"
+      >
+        <label
+          className="f-input-field-label"
+        >
+          Password
+        </label>
+        <input
+          className="f-input-field"
+          name="newPasswordField"
+          onChange={[Function]}
+          placeholder="Super Secret"
+          type="password"
+          value="new"
+        />
+      </div>
+      <div
+        className="f-input"
+      >
+        <label
+          className="f-input-field-label"
+        />
+        <input
+          className="f-input-field"
+          name="repeatNewPasswordField"
+          onChange={[Function]}
+          placeholder="Repeat Super Secret"
+          type="password"
+          value="new"
+        />
+      </div>
+    </div>
+    <input
+      className="f-submit-button"
+      disabled={false}
+      name="save-button"
+      onClick={[Function]}
+      type="button"
+      value="Save Changes"
+    />
+    <label
+      className="f-message f-message-s"
+    />
+  </div>
+  <div
+    className="f-section"
+  >
+    <label
+      className="f-section-title-no-margin warning-text"
+    >
+      Delete Account
+    </label>
+    <hr
+      className="f-hr-section"
+    />
+    <p
+      className="f-description"
+    >
+      Once the deletion process begins you will not be able to access to your profile and saved settings.
+    </p>
+    <input
+      className="f-button warning"
+      name="delete-button"
+      onClick={[Function]}
+      type="button"
+      value="Delete"
+    />
+  </div>
+</div>
+`;
+
+exports[`Security component Rendering tests Security mounts and fields are initialized correctly 1`] = `
+<div>
+  <div
+    className="f-section"
+  >
+    <label
+      className="f-section-title-no-margin"
+    >
+      Change Password
+    </label>
+    <hr
+      className="f-hr-section"
+    />
+    <InputField
+      name="oldPasswordField"
+      onChange={[Function]}
+      placeholder="Old password"
+      text="Old Password"
+      type="password"
+      value=""
+    />
+    <PasswordGroup
+      onPasswordsChange={[Function]}
+    />
+    <Button
+      className="f-submit-button"
+      disabled={true}
+      name="save-button"
+      onClick={[Function]}
+      text="Save Changes"
+    />
+    <Message
+      success={true}
+      text=""
+    />
+  </div>
+  <div
+    className="f-section"
+  >
+    <label
+      className="f-section-title-no-margin warning-text"
+    >
+      Delete Account
+    </label>
+    <hr
+      className="f-hr-section"
+    />
+    <p
+      className="f-description"
+    >
+      Once the deletion process begins you will not be able to access to your profile and saved settings.
+    </p>
+    <Button
+      className="f-button warning"
+      name="delete-button"
+      onClick={[Function]}
+      text="Delete"
+    />
+  </div>
+</div>
+`;

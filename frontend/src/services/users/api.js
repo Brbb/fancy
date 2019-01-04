@@ -1,46 +1,54 @@
 import axios from "axios";
-const axiosInstance = axios.create({
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`
-  }
-});
+
+function getAxiosConfig() {
+  if(!localStorage.getItem("jwt")) throw new Error('User not authenticated')
+  return {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`
+    }
+  };
+}
 
 function handleCatch(err) {
-  return { err: err.message ? err.message : "Something went wrong" };
+  return { err: err.response.data.err ? err.response.data.err : "Something went wrong" };
 }
 
 var api = {
   getById: async id => {
-    return axiosInstance
-      .get(`/api/users/${id}`)
+    return axios
+      .get(`/api/users/${id}`, getAxiosConfig())
       .then(user => {
         return user.data;
       })
       .catch(handleCatch);
   },
   update: async user => {
-    return axiosInstance
-      .put(`/api/users/${user.id}`, user.settings)
+    return axios
+      .put(`/api/users/${user.id}`, user.settings, getAxiosConfig())
       .then(user => {
         return user.data;
       })
       .catch(handleCatch);
   },
   updatePassword: async (user, oldPassword, newPassword, repeatNewPassword) => {
-    return axiosInstance
-      .put(`/api/users/${user.id}/password`, {
-        oldPassword: oldPassword,
-        newPassword: newPassword,
-        repeatNewPassword: repeatNewPassword
-      })
+    return axios
+      .put(
+        `/api/users/${user.id}/password`,
+        {
+          oldPassword: oldPassword,
+          newPassword: newPassword,
+          repeatNewPassword: repeatNewPassword
+        },
+        getAxiosConfig()
+      )
       .then(result => {
         return result.data;
       })
       .catch(handleCatch);
   },
   delete: async user => {
-    return axiosInstance
-      .delete(`/api/users/${user.id}`)
+    return axios
+      .delete(`/api/users/${user.id}`, getAxiosConfig())
       .then(user => {
         return user.data;
       })
