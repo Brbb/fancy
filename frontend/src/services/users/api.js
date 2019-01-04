@@ -1,7 +1,7 @@
 import axios from "axios";
 
 function getAxiosConfig() {
-  if(localStorage.getItem("jwt") == null) throw new Error('User not authenticated')
+  if(!localStorage.getItem("jwt")) throw new Error('User not authenticated')
   return {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`

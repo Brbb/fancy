@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import "./Login.css";
 import authApi from "../../services/auth/api";
 import userApi from "../../services/users/api";
-import {
-  Button,
-  InputField,
-  Message,
-  SectionTitle
-} from "../Elements/Basics";
+import { Button, InputField, Message, SectionTitle } from "../Elements/Basics";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
@@ -34,10 +29,6 @@ class Login extends Component {
     }
   };
 
-  dismissError = () => {
-    this.setState({ error: "" });
-  };
-
   handleUserChange = event => {
     this.setState({ username: event.target.value });
   };
@@ -52,7 +43,7 @@ class Login extends Component {
     ); // SSL
     if (!loginResult.err) {
       localStorage.setItem("jwt", loginResult.token);
-      localStorage.setItem("me", loginResult.userid);
+      localStorage.setItem("me", loginResult.userId);
       await this.loadUser(loginResult.userId);
     } else {
       this.setState({ error: loginResult.err });

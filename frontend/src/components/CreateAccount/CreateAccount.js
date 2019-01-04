@@ -16,7 +16,7 @@ class CreateAccount extends Component {
   }
 
   handleUserChange = event => {
-    this.setState({ username: event.target.value });
+    this.setState({ username: event.target.value, error: "" });
   };
 
   signup = async () => {
@@ -27,7 +27,10 @@ class CreateAccount extends Component {
     );
     if (!result.err) {
       this.props.history.push("/");
-    } else this.setState({ error: result.err });
+    } else
+      this.setState({
+        error: result.err
+      });
   };
 
   render() {
